@@ -11,31 +11,73 @@
 // 3. When game is over and prompt the initials name to storage with score.
 //      a. display the list of scores. (localStorage)
 
-function startTimer() {
-    var presentTime = document.getElementById("timer").innerHTML;
-    var timeArray = presentTime.split(/[:]+/);
-    var m = timeArray[0];
-    var s = checkSecond((timeArray[1] - 1));
-    if(s==59){m=m-1}
-    if((m + '').length == 1) {
-        m = '0' + m;
-    }
-    if(m < 0){
-        endTimer();
-        
-    } 
-    document.getElementById('timer').innerHTML = m + ":" + s;
-    setTimeout(startTimer, 1000);
-}
+var timerEl = document.getElementById('timer');
+var highScoreEl = document.querySelector('#high-score')
 
-function checkSecond(sec) {
-    if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
-    if (sec < 0) {sec = "59"};
-    return sec;
-  }
+function timer() {
+  var timeLeft = 60;
+
+  var timeInterval = setInterval(function () {
+    if (timeLeft > 1) {
+      timerEl.textContent = timeLeft + ' seconds remaining';
+      timeLeft--;
+    }
+    else if (timeLeft === 1) {
+      timerEl.textContent = timeLeft + ' second remaining';
+      timeLeft--;
+    }
+    else {
+      timerEl.textContent = '';
+      clearInterval(timeInterval);
+      endTimer();
+    }
+  }, 1000);
+}
 
   function endTimer() {
     alert("Time's up!");
   }
 
-startTimer();
+timer();
+
+var questions = [
+  {
+    question: "what is a question?",
+    answers: {
+                a: "A question mark",
+                b: "What?",
+                c: "I am asking the same question.",
+                d: "none of above"
+    },
+    correctAnswer: "a"
+            },
+    {
+    question: "How many languages is Javascript?",
+    answers: {
+                a: "JS is languages of many",
+                b: "JS is a language itself",
+                c: "Three",
+                d: "2! Java is a language so is script. Combine together 2 languages"
+    },
+    correctAnswer: "b"
+            },
+    {
+    question: "is HTML a programming language?",
+    answers: {
+                a: "pfft, HTML is not necessary to be named programming language!",
+                b: "Yes!",
+                c: "Maybe",
+                d: "none of above"
+    },
+    correctAnswer: "d"
+            },
+            {
+    question: "Bonus points! Is Earth flat?",
+    answers: {
+                a: "Yes",
+                b: "No",
+                c: "Earth has shape?"
+    },
+    correctAnswer: "b"
+            },
+          ]
