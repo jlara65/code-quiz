@@ -13,6 +13,7 @@
 
 var timerEl = document.getElementById('timer');
 var highScoreEl = document.querySelector('#high-score')
+let startBtn = document.getElementById("start-btn");
 
 function timer() {
   var timeLeft = 60;
@@ -38,8 +39,10 @@ function timer() {
     alert("Time's up!");
   }
 
-timer();
-
+startBtn.addEventListener('click', event => {
+  timer();
+  }
+);
 var questions = [
   {
     question: "what is a question?",
@@ -64,7 +67,7 @@ var questions = [
     {
     question: "is HTML a programming language?",
     answers: {
-                a: "pfft, HTML is not necessary to be named programming language!",
+                a: "Pfft, HTML is not necessary to be named programming language!",
                 b: "Yes!",
                 c: "Maybe",
                 d: "none of above"
