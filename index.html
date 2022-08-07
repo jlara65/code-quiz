@@ -5,16 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/js/script.js">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Code Quiz</title>
 </head>
 <body>
     <header>
-        <h2 class="high-score">View high scores</h2>
+        <h1 class="high-score">View high scores</h1>
         <h2 id="timer"></H2>
     </header>
     
-    <button id="start-btn" onclick="style.display = 'none'">Start Game!</button>
-    <div id="quiz"></div>
+    <div class="welcome-screen" onclick="style.display = 'none'">
+        <h3 class="intro">Welcome To Code Quiz</h3>
+        <h4 class="2nd-intro">Click the button to test your code knowledge!</h4>
+        <button id="start-btn" onclick="style.display = 'none'">Start Game!</button>
+    </div>
+
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+            <h2 id="question"></h2>
+            <Ul>    
+                <li>
+                    <input type="radio" name="answer" id="a" class="answer">
+                    <label for="a" id="a_text"></label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="b" class="answer">
+                    <label for="a" id="b_text"></label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="c" class="answer">
+                    <label for="a" id="c_text"></label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="d" class="answer">
+                    <label for="a" id="d_text"></label>
+                </li>
+            </Ul>  
+        </div>
+        <button id="submit">Submit</button>
+    </div>
+
+        
+
 
     <script src="./assets/js/script.js"></script>
 </body>
