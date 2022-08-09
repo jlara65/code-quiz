@@ -20,7 +20,6 @@ header {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    font-size: x-large;
 }
 
 a:hover {
@@ -38,9 +37,6 @@ a:hover {
     border-radius: 10px;
     box-shadow: 0 3px 10px 2px;
 
-}
-#highscores-list {
-    font-size: larger;
 }
 
 .btn{

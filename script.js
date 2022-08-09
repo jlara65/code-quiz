@@ -1,13 +1,12 @@
 // Code Quiz Pseudocode 
 
 // 1. Click start button to start the quick with timer. Set timer at 60 seconds. 
-//      a. Display the question with multiple choices or true/fake. -about 5 random questions.
+//      a. Display the question with multiple choices. -about 5 questions.
 //      b. if correct answer move on to next question without any timer penalty
-//          * correct answer get 2 points
+//          * correct answer score 10 points
 //      c. if incorrect answer it will penalty with 5 seconds subtract from timer
 // 2. When answered all the question or timer reaches 0
 //      a. game over
-//          * if timer === 0 || all questions answer === ??
 // 3. When game is over and prompt the initials name to storage with score.
 //      a. display the list of scores. (localStorage)
 
@@ -44,27 +43,19 @@ var questionBank = [
                     { answer: 'Pfft, HTML is not necessary to be named programming language!', correct: false},
                     { answer: 'Yes!', correct: false},
                     { answer: 'Maybe', correct: false},
-                    { answer: 'No', correct: true}]
+                    { answer: 'None of above', correct: true}]
         },
         {
           question: 'Is Earth flat?',
           answersArray: [
-                      { answer: 'Yes', correct: false},
-                      { answer: 'No', correct: true},
+                      { answer: 'Yes', correct: true},
+                      { answer: 'No', correct: false},
                       { answer: 'Earth has shape?', correct: false},
                       { answer: 'None of above', correct: false}]
-          },
-          {
-            question: 'Is Javascript very powerful language?',
-            answersArray: [
-                        { answer: 'Yes', correct: true},
-                        { answer: 'No', correct: false},
-                        { answer: 'Somewhat', correct: false},
-                        { answer: 'Maybe no', correct: false}]
-            }
+          }
         ]; 
 
-let secondsLeft = 40;
+let secondsLeft = 60;
 let currentScore = 0;
 let currentQ = -1;
 let finalScore;
@@ -123,7 +114,7 @@ function handleAnswerClick(event) {
       // color indicates correct choice
       event.target.classList.add('correct')
   } else {
-      secondsLeft -= 5;
+      secondsLeft -= 10;
       // color indicates wrong choice
       event.target.classList.add('wrong')
   }
