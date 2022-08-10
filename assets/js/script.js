@@ -7,7 +7,6 @@
 //      c. if incorrect answer it will penalty with 5 seconds subtract from timer
 // 2. When answered all the question or timer reaches 0
 //      a. game over
-//          * if timer === 0 || all questions answer === ??
 // 3. When game is over and prompt the initials name to storage with score.
 //      a. display the list of scores. (localStorage)
 
@@ -21,9 +20,10 @@ var finalScoreEl = document.getElementById('final-score');
 var initialsEl = document.getElementById('initials');
 var highScoresListEl = document.getElementById('highscores-list');
 
+// Array of questions included answers
 var questionBank = [
   {
-    question: 'what is a question?',
+    question: 'What is a question?',
     answersArray: [
                 { answer: 'A question mark', correct: true},
                 { answer: 'What?', correct: false},
@@ -64,22 +64,26 @@ var questionBank = [
             }
         ]; 
 
+// to declares the variables to the value.
 let secondsLeft = 40;
 let currentScore = 0;
 let currentQ = -1;
 let finalScore;
 
+//set function to make hide and display the div/class name
 function changeDiv(curr, next) {
   document.getElementById(curr).classList.add('hide');
   document.getElementById(next).removeAttribute('class')
 };
 
+// To start game function included 3 functions.
 function startGame() {
   changeDiv('start-page', 'question-container');
   nextQuestion();
   startTimer();
 }
 
+//start the timer function & start the endGame function when the timer hit zero
 function startTimer() {
     timerEl.textContent = secondsLeft;
     let timerInterval = setInterval(
@@ -93,17 +97,14 @@ function startTimer() {
         }, 1000);
 };
 
-
+// running the each questions function. If all questions answer will send to the end game function
 function nextQuestion() {
   currentQ++;
-  // If there are no more questions, end the game
   if (currentQ === questionBank.length) {
       secondsLeft = 0;
       endGame();
   } else {
-      // Otherwise populate questionEl
       questionEl.textContent = questionBank[currentQ].question;
-      // and populate answer buttons
       let arr = [answerOne, answerTwo, answerThree, answerFour];
       let i = 0;
       arr.forEach(element => {
@@ -113,21 +114,17 @@ function nextQuestion() {
   };
 };
 
- // When user clicks an answer button
+ // A function to obtain correct answer and click button if correct add score. if incorrect penalty 5 seconds. Add class name for correct or incorrect that match css.
 function handleAnswerClick(event) {
-  // Get the correct answer string
   let correctAnswer = getCorrectAnswer(currentQ);
-  // Compare to user click
   if (event.target.textContent === correctAnswer) {
       currentScore += 10;
-      // color indicates correct choice
       event.target.classList.add('correct')
   } else {
       secondsLeft -= 5;
-      // color indicates wrong choice
       event.target.classList.add('wrong')
   }
-  // Wait 0.5 sec, reset btn color, go to next question
+  // reset the color class name button to half a second to move on for next question.
   setTimeout(
       () => {
           event.target.className = 'btn';
@@ -135,30 +132,29 @@ function handleAnswerClick(event) {
       }, 500);
 };
 
+// function for answer array to go thru and identify the correct answer.
 function getCorrectAnswer(currentQ) {
   let arr = questionBank[currentQ].answersArray;
-  // loop through answersArray, identify correct answer
   for (let j = 0; j < arr.length; j++) {
       if (arr[j].correct) {
-          // return correct answer.
           return arr[j].answer
       }
   }
 };
+
+// function for endGame to change the class name div to results-page and log the score.
 function endGame() {
   timerEl.textContent = 0;
   changeDiv('question-container', 'results-page');
-  // Log currentScore on results page
   finalScore = currentScore;
   finalScoreEl.textContent = finalScore;
-}
+};
+
+// When click submit after input initials name for scores to record to local storage. Send scores to highscores.html
   function handleSubmit() {
     let initials = initialsEl.value;
-    // get array from storage, or initialize as empty array
     let highScoresList = JSON.parse(localStorage.getItem('highScores')) || [];
-    // push new score to array
     highScoresList.push({ initials: initials, score: finalScore });
-    // sort array ascending
     highScoresList = highScoresList.sort((curr, next) => {
         if (curr.score < next.score) {
             return 1
@@ -168,26 +164,26 @@ function endGame() {
             return 0
         }
     });
-    // set updated array to local storage
-    localStorage.setItem('highScores', JSON.stringify(highScoresList))
-    // go to highscores page
-    window.location.href = './highscores.html';
-}
 
-function populateHighScores() {
-  // get array from storage, or initialize as empty array
+    localStorage.setItem('highScores', JSON.stringify(highScoresList))
+    window.location.href = './highscores.html';
+};
+
+//to look up the scores that storage in local storage and display the list.
+function populateHighScores() { 
   let highScoresList = JSON.parse(localStorage.getItem('highScores')) || [];
-  // populate highscores list
+ 
   let list = '';
   highScoresList.forEach(score => {
       list = list + '<p>' + score.initials + '  :  ' + score.score + '</p>';
   });
   highScoresListEl.innerHTML = list;
-}
+};
 
+// when reset button click and it will start resetScores function to clear the scores list from localStorage.
 function resetScores() {
   localStorage.clear();
   populateHighScores();
-}
+};
 
 populateHighScores();

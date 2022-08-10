@@ -1,7 +1,9 @@
+/* Set box-sizing border-box to whole page */
 * {
     box-sizing: border-box;
 }
 
+/* styles the body element */
 body {
  
     padding: 0;
@@ -22,11 +24,12 @@ header {
     font-weight: bold;
     font-size: x-large;
 }
-
+/* hover styles for high scores link */
 a:hover {
     color: darkgray;
 }
 
+/* styles for main class */
 .main {
     justify-content: center;
     align-items: center;
@@ -39,10 +42,12 @@ a:hover {
     box-shadow: 0 3px 10px 2px;
 
 }
+/* Larger font for high scores list */
 #highscores-list {
     font-size: larger;
 }
 
+/* styles the button box */
 .btn{
     border: 3px solid;
     border-radius: 5px;
@@ -55,25 +60,28 @@ a:hover {
     width: 40%;
 }
 
+/* styles the submit button */
 .btn.submit-btn {
     border-width: 2px;
     padding: 5px;
     font-size: medium;
     width: fit-content;
 }
-
+/* set button hover color */
 .btn:hover {
     background-color: lightsalmon;
 }
-
+/* set green color button when click correct answer */
 .btn.correct {
     background-color: lightgreen;
     border-color: green;
 }
+/* set red color button when click incorrect answer */
 .btn.wrong {
     background-color: red;
     border-color: darkred;
 }
+/* hide the element that are name hide class */
 .hide {
     display: none;
 }
@@ -84,5 +92,4 @@ a:hover {
         padding: 10px 15px;
         margin: 5px 10px;
     }
-    
 }
